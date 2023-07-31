@@ -1,0 +1,1 @@
+rootProject.name = "dev.mrz.ktor-together"

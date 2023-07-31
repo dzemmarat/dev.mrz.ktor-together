@@ -1,0 +1,33 @@
+version: '1'
+services:
+  web:
+    build: .
+    ports:
+      - 8080:8080
+    networks:
+      - together-network
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: together_db
+    volumes:
+      - 'mongo:/data/db'
+    networks:
+      - together-network
+    logging:
+      options:
+        max-size: 1g
+
+volumes:
+  mongo:
+
+networks:
+  together-network:
+    driver: bridge
